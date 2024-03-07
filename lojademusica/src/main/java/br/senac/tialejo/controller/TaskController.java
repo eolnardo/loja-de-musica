@@ -1,20 +1,26 @@
 package br.senac.tialejo.controller;
 
 import br.senac.tialejo.model.Task;
+import br.senac.tialejo.repository.TaskRepository;
 import net.sf.jsqlparser.Model;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class TaskController {
 
+    @Autowired
+    private TaskRepository taskRepository;
     List<Task> tasks = new ArrayList<>();
     @GetMapping("/login")
     public ModelAndView login(){
@@ -24,17 +30,11 @@ public class TaskController {
 
     }
     @PostMapping("/login")
-    public String create(Task task){
+    public String create(@ModelAttribute Task task){
 
-        if(task.getId() !=null){
-            Task taskFind = tasks.stream().filter(taskItem ->
-                    task.getId().equals(taskItem.getId())).findFirst().get();
-            tasks.set(tasks.indexOf(taskFind), task);
-        }else{
-            Long id = tasks.size() +1L;
-            tasks.add(new Task(id, task.getName(), task.getEmail()));
+//TODO: tratamento de erros e validação
+        taskRepository.save(task);
 
-        }
         return "redirect:/principal";
 
     }
@@ -45,6 +45,7 @@ public class TaskController {
 
     @GetMapping("/listar-usuarios")
     public ModelAndView listar(){
+        Iterable<Task> tasks = taskRepository.findAll();
         ModelAndView mv = new ModelAndView("listar-usuarios");
         mv.addObject("tasks", tasks);
         return mv;
@@ -52,16 +53,23 @@ public class TaskController {
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id){
         ModelAndView mv = new ModelAndView("edit");
-        Task taskFind = tasks.stream().filter(task -> id.equals(task.getId())).findFirst().get();
-        mv.addObject("task", taskFind);
+        Optional<Task> taskFinder =taskRepository.findById(id);
+
+        if(taskFinder.isPresent()) {
+            Task task = taskFinder.get();
+            mv.addObject("task", task);
+        }
+
         return mv;
     }
     @PostMapping("/edit")
     public String update(Task task) {
-        Task taskToUpdate = tasks.stream().filter(t -> t.getId().equals(task.getId())).findFirst().orElse(null);
-        if (taskToUpdate != null) {
+        Optional<Task> optionalTaskToUpdate = taskRepository.findById(task.getId());
+        if (optionalTaskToUpdate.isPresent()) {
+            Task taskToUpdate = optionalTaskToUpdate.get();
             taskToUpdate.setName(task.getName());
             taskToUpdate.setEmail(task.getEmail());
+            taskRepository.save(taskToUpdate);
         }
         return "redirect:/listar-usuarios";
     }

@@ -1,12 +1,19 @@
 package br.senac.tialejo.model;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-
+@Entity @Table(name = "FUNCIONARIO")
 public class Task {
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name= "ID")
     private Long id;
+    @Column(name= "NAME")
     private String name;
+    @Column(name= "EMAIL")
+    private String email;
+
 
     public Task() {
     }
@@ -41,5 +48,5 @@ public class Task {
         this.email = email;
     }
 
-    private String email;
+
 }
