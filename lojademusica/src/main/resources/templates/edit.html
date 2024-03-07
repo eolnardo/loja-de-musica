@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Funcionário</title>
+</head>
+<body>
+<form method="post" action="/edit" th:object="${task}">
+    <input type="hidden" th:value="${task.id}" name="id">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Nome</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" name="name" th:value="${task.name}">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">E-mail</label>
+        <input type="email" class="form-control" id="exampleInputPassword1" placeholder="E-mail" name="email" th:value="${task.email}">
+    </div>
+    <button type="submit" class="btn btn-primary">Editar</button>
+    <a href="/listar-usuarios" class="btn btn-secondary">Cancelar</a> <!-- Adicione este link para cancelar a edição e voltar para a lista de usuários -->
+</form>
+</body>
+</html>

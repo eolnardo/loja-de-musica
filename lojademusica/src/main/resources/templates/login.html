@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
 	<title>Tialejo ®</title>
@@ -7,8 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/css/style.css">
-	<link rel="shortcut icon" href="/images/cd.ico" type="image/x-icon">
+	<link rel="stylesheet" th:href="@{/CSS/style.css}">
+	<link rel="shortcut icon" th:href="@{/images/cd.ico}" type="image/x-icon">
 </head>
 
 <body>
@@ -47,8 +47,9 @@
 									<div class="center-wrap">
 										<div class="section text-center">
 											<h4 class="mb-3 pb-3">Cadastre-se</h4>
+											<form method="post" action="/login">
 											<div class="form-group">
-												<input type="text" class="form-style" placeholder="Nome Completo">
+												<input type="text" class="form-style" placeholder="Nome Completo" name="name">
 												<i class="input-icon uil uil-user"></i>
 											</div>
 											<div class="form-group mt-2">
@@ -56,15 +57,16 @@
 												<i class="input-icon uil uil-phone"></i>
 											</div>
 											<div class="form-group mt-2">
-												<input type="email" class="form-style" placeholder="Email">
+												<input type="email" class="form-style" placeholder="Email" name="email">
 												<i class="input-icon uil uil-at"></i>
 											</div>
 											<div class="form-group mt-2">
 												<input type="password" class="form-style" placeholder="Senha">
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
-											<a href="" class="btn mt-4">Cadastrar</a>
+											<button type="submit" class="btn mt-4">Cadastrar</button>
 											<a href="" class="btn mt-4">Voltar</a>
+											</form>
 										</div>
 									</div>
 								</div>
