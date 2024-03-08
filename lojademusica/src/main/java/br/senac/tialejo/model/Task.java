@@ -1,17 +1,19 @@
 package br.senac.tialejo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.NumberFormat;
 
 @Entity @Table(name = "FUNCIONARIO")
 public class Task {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name= "ID")
     private Long id;
-    @Column(name= "NAME")
+    @Column(name= "NAME") @NotBlank(message = "Nome é obrigatório")
     private String name;
-    @Column(name= "EMAIL")
+    @Column(name= "EMAIL") @NotBlank(message = "Email é obrigatório")
     private String email;
     @Column(name="TELEFONE")
     private Integer telefone;

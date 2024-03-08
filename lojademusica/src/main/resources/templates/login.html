@@ -25,7 +25,7 @@
 						<input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
 						<label for="reg-log"></label>
 						<div class="card-3d-wrap mx-auto">
-							<div class="card-3d-wrapper">
+							<div class="card-3d-wrapper" th:unless="${isRegisterVisible}">
 								<div class="card-front">
 									<div class="center-wrap">
 										<div class="section text-center">
@@ -47,7 +47,12 @@
 									<div class="center-wrap">
 										<div class="section text-center">
 											<h4 class="mb-3 pb-3">Cadastre-se</h4>
-											<form method="post" action="/login">
+											<form method="post" action="/login" th:object="${task}">
+												<div th:if="${errors}">
+													<ul>
+														<li th:each="error : ${errors}" th:text="${error.defaultMessage}"> </li>
+													</ul>
+												</div>
 											<div class="form-group">
 												<input type="text" class="form-style" placeholder="Nome Completo" name="name">
 												<i class="input-icon uil uil-user"></i>

@@ -6,6 +6,8 @@ import net.sf.jsqlparser.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,13 +31,17 @@ public class TaskController {
 
     }
     @PostMapping("/login")
-    public String create(@ModelAttribute Task task){
-
-//TODO: tratamento de erros e validação
+    public ModelAndView create(@ModelAttribute @Validated Task task, BindingResult result) {
+        ModelAndView mv = new ModelAndView("login");
+        if (result.hasErrors()) {
+            mv.setViewName("login");
+            mv.addObject("task", task); // Adiciona o objeto Task de volta ao modelo
+            mv.addObject("errors", result.getAllErrors()); // Adiciona os erros de validação ao modelo
+            return mv;
+        }
         taskRepository.save(task);
-
-        return "redirect:/principal";
-
+        mv.setViewName("redirect:/principal");
+        return mv;
     }
     @GetMapping("principal")
     public String principal(){
