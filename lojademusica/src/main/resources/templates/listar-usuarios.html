@@ -13,9 +13,15 @@
 
 <body>
     <nav class="navbar">
-        <img src="/images/cd.ico" alt="Logo">
-        <h1>Tialejo ®</h1>
-    </nav>
+		<div class="left-navbar">
+			<img th:src="@{/images/cd.ico}" alt="Logo">
+			<h1>Tialejo ®</h1>
+		</div>
+		<div class="right-navbar">
+			<a href="" class="btn mt-4">Voltar</a>
+			<a href="" class="btn mt-4">Logout</a>
+		</div>
+	</nav>
     <section class="content">
         <div class="container">
 
@@ -23,11 +29,11 @@
                 <div class="col-12 text-center align-self-center py-5">
                     <div class="section pb-5 pt-5 pt-sm-2 text-center">
                         <label for="reg-log"></label>
-                        <div class="card-3d-wrap mx-auto">
+                        <div class="card-3d-wrap mx-auto" style="width: fit-content;">
                             <div class="card-3d-wrapper">
-                                <div class="card-front" style="width: 500px;">
-                                    <div class="center-wrap">
-                                        <div class="section text-center" >
+                                <div class="card-front" >
+                                    <div class="center-wrap" >
+                                        <div class="section text-center">
                                             <h1 class="mb-0 pb-3"><span>Listar Usuários</span></h1>
                                             <div class="search">
                                                 <input type="text" class="form-style" placeholder="Busca"> 
@@ -60,6 +66,7 @@
                                                   <!-- Adicionar mais TR (table row) de acordo com o necessário, acho que aqui que faz o for each-->
                                                 </tbody>
                                               </table>
+                                              
                                         </div>
                                     </div>
                                 </div>

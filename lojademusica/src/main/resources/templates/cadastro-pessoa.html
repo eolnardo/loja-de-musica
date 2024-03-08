@@ -18,7 +18,6 @@
 			<h1>Tialejo ®</h1>
 		</div>
 		<div class="right-navbar">
-			<a href="" class="btn mt-4">Voltar</a>
 			<a href="" class="btn mt-4">Logout</a>
 		</div>
 	</nav>
@@ -27,32 +26,12 @@
 			<div class="row full-height justify-content-center">
 				<div class="col-12 text-center align-self-center py-5">
 					<div class="section pb-5 pt-5 pt-sm-2 text-center">
-						<h6 class="mb-0 pb-3"><span>Login </span><span>Cadastre-se</span></h6>
-						<input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
-						<label for="reg-log"></label>
 						<div class="card-3d-wrap mx-auto">
 							<div class="card-3d-wrapper" th:unless="${isRegisterVisible}">
-								<div class="card-front">
-									<div class="center-wrap">
-										<div class="section text-center">
-											<h4 class="mb-4 pb-3">Login</h4>
-											<div class="form-group">
-												<input type="email" class="form-style" placeholder="Email">
-												<i class="input-icon uil uil-at"></i>
-											</div>
-											<div class="form-group mt-2">
-												<input type="password" class="form-style" placeholder="Senha">
-												<i class="input-icon uil uil-lock-alt"></i>
-											</div>
-											<a href="" class="btn mt-4">Login</a>
-											<a href="" class="btn mt-4">Voltar</a>
-										</div>
-									</div>
-								</div>
 								<div class="card-back">
 									<div class="center-wrap">
 										<div class="section text-center">
-											<h4 class="mb-3 pb-3">Cadastre-se</h4>
+											<h4 class="mb-3 pb-3">Dados Pessoais</h4>
 											<form method="post" action="/login" th:object="${task}">
 												<div th:if="${errors}">
 													<ul>

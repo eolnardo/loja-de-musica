@@ -7,9 +7,9 @@ body {
     color: #40cfff;
     background-color: #1f2029;
 }
-
 a:hover {
     text-decoration: none;
+    cursor: pointer;
 }
 
 .link {
@@ -42,19 +42,36 @@ h6 span {
 
 .navbar {
     display: flex;
-    justify-content: flex-start;
-    column-gap: 10px;
+    justify-content: space-between;
+    flex-direction: row;
     position: absolute;
     height: 3rem;
     width: 100%;
     background-color: #40cfff;
     color: #000000;
-    align-items: center;
+    padding: 0%;
+    margin: 0%;
 }
 
 .navbar img {
     height: 2rem;
     width: 2rem;
+}
+
+.left-navbar, .right-navbar{
+    padding: 0;
+    margin-left: 1rem;
+    display: flex;
+    column-gap: 1rem;
+    align-items: center;
+}
+
+.right-navbar{
+    margin-top: -1.3rem;
+}
+
+.right-navbar a{
+    cursor: pointer;
 }
 
 .content {
