@@ -2,6 +2,7 @@ package br.senac.tialejo.controller;
 
 import br.senac.tialejo.model.Task;
 import br.senac.tialejo.repository.TaskRepository;
+import jakarta.validation.Valid;
 import net.sf.jsqlparser.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -26,23 +27,52 @@ public class TaskController {
     @GetMapping("/login")
     public ModelAndView login(){
         ModelAndView mv = new ModelAndView("login");
-        mv.addObject("task", new Task());
+        //mv.addObject("task", new Task());
         return mv;
 
     }
     @PostMapping("/login")
     public ModelAndView create(@ModelAttribute @Validated Task task, BindingResult result) {
         ModelAndView mv = new ModelAndView("login");
-        if (result.hasErrors()) {
-            mv.setViewName("login");
-            mv.addObject("task", task); // Adiciona o objeto Task de volta ao modelo
-            mv.addObject("errors", result.getAllErrors()); // Adiciona os erros de validação ao modelo
-            return mv;
-        }
-        taskRepository.save(task);
-        mv.setViewName("redirect:/principal");
+//        if (result.hasErrors()) {
+//            mv.setViewName("login");
+//            mv.addObject("task", task); // Adiciona o objeto Task de volta ao modelo
+//            mv.addObject("errors", result.getAllErrors()); // Adiciona os erros de validação ao modelo
+//            return mv;
+//        }
+//        taskRepository.save(task);
+//        mv.setViewName("redirect:/principal");
         return mv;
     }
+    @GetMapping("/cadastro-pessoa")
+    public ModelAndView cadastro(){
+       ModelAndView mv = new ModelAndView("cadastro-pessoa");
+       mv.addObject("task", new Task());
+        return mv;
+
+    }
+    @PostMapping("/cadastro-pessoa")
+    public ModelAndView cadastrarUsuario(@ModelAttribute @Validated Task task, BindingResult result) {
+        ModelAndView mv = new ModelAndView("cadastro-pessoa");
+
+        if (!task.getSenha().equals(task.getConfirmaSenha())) {
+            result.rejectValue("senha", "error.task", "As senhas não coincidem");
+
+        }
+        if (result.hasErrors()) {
+            // Se houver erros de validação, retorna para a mesma página de cadastro com os erros
+            return mv;
+        }
+
+
+        // Lógica para salvar o usuário no banco de dados
+        taskRepository.save(task);
+
+        // Redireciona para a página principal após o cadastro bem-sucedido
+        return new ModelAndView("redirect:/principal");
+    }
+
+
     @GetMapping("principal")
     public String principal(){
         return "principal";

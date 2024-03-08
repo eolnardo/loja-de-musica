@@ -2,75 +2,102 @@
 <html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
-	<title>Tialejo ®</title>
+	<title>Tialejo ® - Cadastro</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
 	<link rel="stylesheet" th:href="@{/CSS/style.css}">
 	<link rel="shortcut icon" th:href="@{/images/cd.ico}" type="image/x-icon">
+
+	<style>
+		.error-message {
+            color: #ff0000;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .form-group.error input.form-style {
+            border: 1px solid #ff0000;
+            background-color: #ffe6e6;
+        }
+	</style>
+
 </head>
 
 <body>
-	<nav class="navbar">
-		<div class="left-navbar">
-			<img th:src="@{/images/cd.ico}" alt="Logo">
-			<h1>Tialejo ®</h1>
-		</div>
-		<div class="right-navbar">
-			<a href="" class="btn mt-4">Logout</a>
-		</div>
-	</nav>
-	<section class="content">
-		<div class="container">
-			<div class="row full-height justify-content-center">
-				<div class="col-12 text-center align-self-center py-5">
-					<div class="section pb-5 pt-5 pt-sm-2 text-center">
-						<div class="card-3d-wrap mx-auto">
-							<div class="card-3d-wrapper" th:unless="${isRegisterVisible}">
-								<div class="card-back">
-									<div class="center-wrap">
-										<div class="section text-center">
-											<h4 class="mb-3 pb-3">Dados Pessoais</h4>
-											<form method="post" action="/login" th:object="${task}">
-												<div th:if="${errors}">
-													<ul>
-														<li th:each="error : ${errors}" th:text="${error.defaultMessage}"> </li>
-													</ul>
-												</div>
-											<div class="form-group">
-												<input type="text" class="form-style" placeholder="Nome Completo" name="name">
-												<i class="input-icon uil uil-user"></i>
-											</div>
-											<div class="form-group mt-2">
-												<input type="text" class="form-style" placeholder="Telefone" name="telefone">
-												<i class="input-icon uil uil-phone"></i>
-											</div>
-											<div class="form-group mt-2">
-												<input type="email" class="form-style" placeholder="Email" name="email">
-												<i class="input-icon uil uil-at"></i>
-											</div>
-											<div class="form-group mt-2">
-												<input type="password" class="form-style" placeholder="Senha">
-												<i class="input-icon uil uil-lock-alt"></i>
-											</div>
-											<div class="form-group mt-2">
-												<input type="password" class="form-style" placeholder="Confirmar Senha">
-												<i class="input-icon uil uil-lock-alt"></i>
-											</div>
-											<button type="submit" class="btn mt-4">Cadastrar</button>
-											<a href="" class="btn mt-4">Voltar</a>
-											</form>
-										</div>
-									</div>
-								</div>
+<nav class="navbar">
+	<div class="left-navbar">
+		<img th:src="@{/images/cd.ico}" alt="Logo">
+		<h1>Tialejo ®</h1>
+
+	<div class="right-navbar">
+		<a href="" class="btn mt-4">Login</a>
+		<a href="" class="btn mt-4">Logout</a>
+	</div>
+	</div>
+</nav>
+<section class="content">
+	<div class="container">
+		<div class="row full-height justify-content-center">
+			<div class="col-12 text-center align-self-center py-5">
+				<div class="section pb-5 pt-5 pt-sm-2 text-center">
+
+					<h4 class="mb-3 pb-3">Cadastre-se</h4>
+					<form method="post" action="/cadastro-pessoa" th:object="${task}">
+						<div th:if="${errors}" class="error-message">
+							<ul>
+								<li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+							</ul>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-style" placeholder="Nome Completo" name="name">
+							<i class="input-icon uil uil-user"></i>
+							<div th:if="${#fields.hasErrors('name')}" class="error-message">
+								<ul>
+									<li th:each="error : ${#fields.errors('name')}" th:text="${error}"></li>
+								</ul>
 							</div>
 						</div>
-					</div>
+						<div class="form-group mt-2">
+							<input type="text" class="form-style" placeholder="Telefone" name="telefone">
+							<i class="input-icon uil uil-phone"></i>
+							<div th:if="${#fields.hasErrors('name')}" class="error-message">
+								<ul>
+									<li th:each="error : ${#fields.errors('telefone')}" th:text="${error}"></li>
+								</ul>
+							</div>
+						</div>
+						<div class="form-group mt-2">
+							<input type="email" class="form-style" placeholder="Email" name="email">
+							<i class="input-icon uil uil-at"></i>
+							<div th:if="${#fields.hasErrors('email')}" class="error-message">
+								<ul>
+									<li th:each="error : ${#fields.errors('email')}" th:text="${error}"></li>
+								</ul>
+							</div>
+						</div>
+						<div class="form-group mt-2">
+							<input type="password" class="form-style" placeholder="Senha" name="senha">
+							<i class="input-icon uil uil-lock-alt"></i>
+						</div>
+						<div class="form-group mt-2">
+							<input type="password" class="form-style" placeholder="Confirmar Senha" name="confirmaSenha">
+							<i class="input-icon uil uil-lock-alt"></i>
+							<div th:if="${#fields.hasErrors('senha')}" class="error-message">
+							<ul>
+								<li th:each="error : ${#fields.errors('senha')}" th:text="${error}"></li>
+							</ul>
+						</div>
+						</div>
+						<button type="submit" class="btn mt-4">Cadastrar</button>
+						<a href="" class="btn mt-4">Voltar</a>
+					</form>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 </body>
 
 </html>

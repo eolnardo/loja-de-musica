@@ -2,7 +2,7 @@
 <html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
-	<title>Tialejo ®</title>
+	<title>Tialejo ® - Login</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
@@ -12,86 +12,36 @@
 </head>
 
 <body>
-	<nav class="navbar">
-		<div class="left-navbar">
-			<img th:src="@{/images/cd.ico}" alt="Logo">
-			<h1>Tialejo ®</h1>
-		</div>
-		<div class="right-navbar">
-			<a href="" class="btn mt-4">Voltar</a>
-			<a href="" class="btn mt-4">Logout</a>
-		</div>
-	</nav>
-	<section class="content">
-		<div class="container">
-			<div class="row full-height justify-content-center">
-				<div class="col-12 text-center align-self-center py-5">
-					<div class="section pb-5 pt-5 pt-sm-2 text-center">
-						<h6 class="mb-0 pb-3"><span>Login </span><span>Cadastre-se</span></h6>
-						<input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
-						<label for="reg-log"></label>
-						<div class="card-3d-wrap mx-auto">
-							<div class="card-3d-wrapper" th:unless="${isRegisterVisible}">
-								<div class="card-front">
-									<div class="center-wrap">
-										<div class="section text-center">
-											<h4 class="mb-4 pb-3">Login</h4>
-											<div class="form-group">
-												<input type="email" class="form-style" placeholder="Email">
-												<i class="input-icon uil uil-at"></i>
-											</div>
-											<div class="form-group mt-2">
-												<input type="password" class="form-style" placeholder="Senha">
-												<i class="input-icon uil uil-lock-alt"></i>
-											</div>
-											<a href="" class="btn mt-4">Login</a>
-											<a href="" class="btn mt-4">Voltar</a>
-										</div>
-									</div>
-								</div>
-								<div class="card-back">
-									<div class="center-wrap">
-										<div class="section text-center">
-											<h4 class="mb-3 pb-3">Cadastre-se</h4>
-											<form method="post" action="/login" th:object="${task}">
-												<div th:if="${errors}">
-													<ul>
-														<li th:each="error : ${errors}" th:text="${error.defaultMessage}"> </li>
-													</ul>
-												</div>
-											<div class="form-group">
-												<input type="text" class="form-style" placeholder="Nome Completo" name="name">
-												<i class="input-icon uil uil-user"></i>
-											</div>
-											<div class="form-group mt-2">
-												<input type="text" class="form-style" placeholder="Telefone" name="telefone">
-												<i class="input-icon uil uil-phone"></i>
-											</div>
-											<div class="form-group mt-2">
-												<input type="email" class="form-style" placeholder="Email" name="email">
-												<i class="input-icon uil uil-at"></i>
-											</div>
-											<div class="form-group mt-2">
-												<input type="password" class="form-style" placeholder="Senha">
-												<i class="input-icon uil uil-lock-alt"></i>
-											</div>
-											<div class="form-group mt-2">
-												<input type="password" class="form-style" placeholder="Confirmar Senha">
-												<i class="input-icon uil uil-lock-alt"></i>
-											</div>
-											<button type="submit" class="btn mt-4">Cadastrar</button>
-											<a href="" class="btn mt-4">Voltar</a>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+<nav class="navbar">
+	<div class="left-navbar">
+		<img th:src="@{/images/cd.ico}" alt="Logo">
+		<h1>Tialejo ®</h1>
+	</div>
+	<div class="right-navbar">
+		<a href="" class="btn mt-4">Logout</a>
+	</div>
+</nav>
+<section class="content">
+	<div class="container">
+		<div class="row full-height justify-content-center">
+			<div class="col-12 text-center align-self-center py-5">
+				<div class="section pb-5 pt-5 pt-sm-2 text-center">
+					<h4 class="mb-4 pb-3">Login</h4>
+					<div class="form-group">
+						<input type="email" class="form-style" placeholder="Email">
+						<i class="input-icon uil uil-at"></i>
 					</div>
+					<div class="form-group mt-2">
+						<input type="password" class="form-style" placeholder="Senha">
+						<i class="input-icon uil uil-lock-alt"></i>
+					</div>
+					<a href="" class="btn mt-4"> Login</a>
+					<a th:href="@{'/cadastro-pessoa'}" class="btn mt-4" >Cadastre-se</a>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 </body>
 
 </html>
