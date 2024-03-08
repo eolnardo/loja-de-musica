@@ -1,82 +1,84 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Tialejo ® - Principal</title>
+    <title>Tialejo ® - Lista de Funcionários</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="shortcut icon" href="/images/cd.ico" type="image/x-icon">
+    <style>
+
+
+        .section {
+            margin-top: 50px; /* Ajuste o espaçamento superior conforme necessário */
+        }
+
+
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
 </head>
 
 <body>
-    <nav class="navbar">
-		<div class="left-navbar">
-			<img th:src="@{/images/cd.ico}" alt="Logo">
-			<h1>Tialejo ®</h1>
-		</div>
-		<div class="right-navbar">
-			<a href="" class="btn mt-4">Voltar</a>
-			<a href="" class="btn mt-4">Logout</a>
-		</div>
-	</nav>
-    <section class="content">
-        <div class="container">
-
-            <div class="row full-height justify-content-center">
-                <div class="col-12 text-center align-self-center py-5">
-                    <div class="section pb-5 pt-5 pt-sm-2 text-center">
-                        <label for="reg-log"></label>
-                        <div class="card-3d-wrap mx-auto" style="width: fit-content;">
-                            <div class="card-3d-wrapper">
-                                <div class="card-front" >
-                                    <div class="center-wrap" >
-                                        <div class="section text-center">
-                                            <h1 class="mb-0 pb-3"><span>Listar Usuários</span></h1>
-                                            <div class="search">
-                                                <input type="text" class="form-style" placeholder="Busca"> 
-                                                <a href=""><img src="/images/search.png" alt=""></a>
-                                            </div>
-                                            <table>
-                                                <thead>
-                                                  <tr>
-                                                      <th scope="col">Adm_ID</th>
-                                                      <th scope="col">Nome</th>
-                                                      <th scope="col">Email</th>
-                                                      <th scope="col">Telefone</th>
-                                                      <th scope="col">Grupo</th>
-                                                      <th scope="col">Status</th>
-                                                      <th scope="col">#</th>
-                                                  </tr>
-                                                </thead>
-                                                <tbody>
-                                                  <tr data-th-each="task : ${tasks}">
-                                                      <td data-th-text="${task.id}"></td>
-                                                      <td data-th-text="${task.name}"></td>
-                                                      <td data-th-text="${task.email}"></td>
-                                                      <td data-th-text="${task.telefone}"></td>
-                                                      <td data-th-text="${task.grupo}"></td>
-                                                      <td data-th-text="${task.status}"></td>
-                                                      <td>
-                                                          <a th:href="@{'/edit/'+${task.id}}">Editar</a>
-                                                      </td>
-                                                  </tr>
-                                                  <!-- Adicionar mais TR (table row) de acordo com o necessário, acho que aqui que faz o for each-->
-                                                </tbody>
-                                              </table>
-                                              
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<nav class="navbar">
+    <div class="left-navbar">
+        <img th:src="@{/images/cd.ico}" alt="Logo">
+        <h1>Tialejo ®</h1>
+    </div>
+    <div class="right-navbar">
+        <a href="" class="btn mt-4">Voltar</a>
+        <a href="" class="btn mt-4">Logout</a>
+    </div>
+</nav>
+<section class="content">
+    <div class="container">
+        <div class="row full-height justify-content-center align-items-center">
+            <div class="col-12 text-center align-self-center py-5">
+                <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                    <h1 class="mb-0 pb-3"><span>Listar Usuários</span></h1>
+                    <div class="search">
+                        <input type="text" class="form-style" placeholder="Busca">
+                        <a href=""><img src="/images/search.png" alt=""></a>
                     </div>
+                    <table class="center-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">Grupo</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">#</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-th-each="task : ${tasks}">
+                            <td data-th-text="${task.id}"></td>
+                            <td data-th-text="${task.name}"></td>
+                            <td data-th-text="${task.email}"></td>
+                            <td data-th-text="${task.telefone}"></td>
+                            <td data-th-text="${task.grupo}"></td>
+                            <td data-th-text="${task.status}"></td>
+                            <td>
+                                <a th:href="@{'/edit/'+${task.id}}">Editar</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 </body>
 
 </html>

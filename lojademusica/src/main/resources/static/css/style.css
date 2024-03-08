@@ -264,21 +264,23 @@ table {
 }
 
 th,
-td {
+ td {
     border: 1px solid #dddddd;
     text-align: center;
-    padding: 5px;
+    padding: 8px;
     width: fit-content;
 }
 
 th {
-    background-color: #000000;
+    background-color: #f0f8ff;
 }
 
 .search{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    margin-top: 20px; /* Ajuste da margem superior para mover o campo de busca um pouco para cima */
+                margin-bottom: 10px; /* Margem inferior para dar espaço entre o campo de busca e a tabela */
+                display: flex;
+                flex-direction: row;
+                align-items: center;
 }
 
 .search img{
