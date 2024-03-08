@@ -36,23 +36,23 @@
                                             <table>
                                                 <thead>
                                                   <tr>
-                                                    <th scope="col">Nome</th>
-                                                    <th scope="col">Email</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col">Telefone</th>
-                                                    <th scope="col">Adm_ID</th>
-                                                    <th scope="col">Grupo</th>
-                                                    <th scope="col">#</th>
+                                                      <th scope="col">Adm_ID</th>
+                                                      <th scope="col">Nome</th>
+                                                      <th scope="col">Email</th>
+                                                      <th scope="col">Telefone</th>
+                                                      <th scope="col">Grupo</th>
+                                                      <th scope="col">Status</th>
+                                                      <th scope="col">#</th>
                                                   </tr>
                                                 </thead>
                                                 <tbody>
                                                   <tr data-th-each="task : ${tasks}">
-                                                    <td data-th-text="${task.name}"></td>
-                                                    <td data-th-text="${task.email}"></td>
-                                                    <td>teste</td>
-                                                    <td>teste</td>
-                                                    <td data-th-text="${task.id}"></td>
-                                                    <td>teste</td>
+                                                      <td data-th-text="${task.id}"></td>
+                                                      <td data-th-text="${task.name}"></td>
+                                                      <td data-th-text="${task.email}"></td>
+                                                      <td data-th-text="${task.telefone}"></td>
+                                                      <td data-th-text="${task.grupo}"></td>
+                                                      <td data-th-text="${task.status}"></td>
                                                       <td>
                                                           <a th:href="@{'/edit/'+${task.id}}">Editar</a>
                                                       </td>

@@ -13,15 +13,25 @@ public class Task {
     private String name;
     @Column(name= "EMAIL")
     private String email;
+    @Column(name="TELEFONE")
+    private Integer telefone;
+    @Column(name = "GRUPO")
+    private String grupo;
+    @Column(name = "STATUS")
+    private String status;
+
 
 
     public Task() {
     }
 
-    public Task(Long id, String name, String email) {
+    public Task(Long id, String name, String email, Integer telefone, String grupo, String status) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.telefone = telefone;
+        this.grupo = grupo;
+        this.status = status;
     }
 
     public Long getId() {
@@ -48,5 +58,27 @@ public class Task {
         this.email = email;
     }
 
+    public Integer getTelefone() {
+        return telefone;
+    }
 
+    public void setTelefone(Integer telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

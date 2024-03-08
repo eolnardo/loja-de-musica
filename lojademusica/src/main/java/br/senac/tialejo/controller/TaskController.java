@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Optional;
 
 @Controller
@@ -21,7 +20,7 @@ public class TaskController {
 
     @Autowired
     private TaskRepository taskRepository;
-    List<Task> tasks = new ArrayList<>();
+
     @GetMapping("/login")
     public ModelAndView login(){
         ModelAndView mv = new ModelAndView("login");
@@ -69,10 +68,20 @@ public class TaskController {
             Task taskToUpdate = optionalTaskToUpdate.get();
             taskToUpdate.setName(task.getName());
             taskToUpdate.setEmail(task.getEmail());
+            taskToUpdate.setTelefone(task.getTelefone());
+            taskToUpdate.setGrupo(task.getGrupo());
+            taskToUpdate.setStatus(task.getStatus());
             taskRepository.save(taskToUpdate);
         }
         return "redirect:/listar-usuarios";
     }
+//    @PostMapping("/edit")
+//    public String delete(Task task) {
+//
+//       taskRepository.deleteById(task.getId());
+//
+//        return "redirect:/listar-usuarios";
+//    }
 
 
 
