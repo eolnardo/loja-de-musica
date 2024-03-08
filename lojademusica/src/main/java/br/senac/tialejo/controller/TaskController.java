@@ -31,9 +31,9 @@ public class TaskController {
         return mv;
 
     }
-    @PostMapping("/login")
-    public ModelAndView create(@ModelAttribute @Validated Task task, BindingResult result) {
-        ModelAndView mv = new ModelAndView("login");
+//    @PostMapping("/login")
+//    public ModelAndView create(@ModelAttribute @Validated Task task, BindingResult result) {
+//        ModelAndView mv = new ModelAndView("login");
 //        if (result.hasErrors()) {
 //            mv.setViewName("login");
 //            mv.addObject("task", task); // Adiciona o objeto Task de volta ao modelo
@@ -42,8 +42,8 @@ public class TaskController {
 //        }
 //        taskRepository.save(task);
 //        mv.setViewName("redirect:/principal");
-        return mv;
-    }
+//        return mv;
+//    }
     @GetMapping("/cadastro-pessoa")
     public ModelAndView cadastro(){
        ModelAndView mv = new ModelAndView("cadastro-pessoa");

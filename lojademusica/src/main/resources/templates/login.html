@@ -11,6 +11,19 @@
 	<link rel="shortcut icon" th:href="@{/images/cd.ico}" type="image/x-icon">
 </head>
 
+<style>
+	.error-message {
+        color: #ff0000;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    .form-group.error input.form-style {
+        border: 1px solid #ff0000;
+        background-color: #ffe6e6;
+    }
+</style>
+
 <body>
 <nav class="navbar">
 	<div class="left-navbar">
@@ -18,7 +31,7 @@
 		<h1>Tialejo ®</h1>
 	</div>
 	<div class="right-navbar">
-		<a href="" class="btn mt-4">Logout</a>
+
 	</div>
 </nav>
 <section class="content">
@@ -27,16 +40,28 @@
 			<div class="col-12 text-center align-self-center py-5">
 				<div class="section pb-5 pt-5 pt-sm-2 text-center">
 					<h4 class="mb-4 pb-3">Login</h4>
+					<form method="POST" action="/login">
+						<div th:if="${errors}" class="error-message">
+							<ul>
+								<li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+							</ul>
+						</div>
 					<div class="form-group">
-						<input type="email" class="form-style" placeholder="Email">
+						<input type="email" class="form-style" placeholder="Email" name="email">
 						<i class="input-icon uil uil-at"></i>
 					</div>
 					<div class="form-group mt-2">
-						<input type="password" class="form-style" placeholder="Senha">
+						<input type="password" class="form-style" placeholder="Senha" name="senha">
 						<i class="input-icon uil uil-lock-alt"></i>
 					</div>
-					<a href="" class="btn mt-4"> Login</a>
+						<div th:if="${error}" class="error-message">
+							<ul>
+								<li th:text="${error}"></li>
+							</ul>
+						</div>
+					<button type="submit" href="" class="btn mt-4"> Login</button>
 					<a th:href="@{'/cadastro-pessoa'}" class="btn mt-4" >Cadastre-se</a>
+					</form>
 				</div>
 			</div>
 		</div>
