@@ -3,6 +3,7 @@ package br.senac.tialejo.controller;
 import br.senac.tialejo.model.Task;
 import br.senac.tialejo.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,9 @@ public class LoginController {
     @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @PostMapping("/login")
     public ModelAndView login(@RequestParam("email") String email, @RequestParam("senha") String senha) {
         ModelAndView mv = new ModelAndView();
@@ -23,7 +27,7 @@ public class LoginController {
         Optional<Task> userOptional = taskRepository.findByEmail(email);
         if (userOptional.isPresent()) {
             Task user = userOptional.get();
-            if (user.getSenha().equals(senha)) {
+            if (passwordEncoder.matches(senha, user.getSenha())) { // <- verificando senha criptografada
                 // Autentica o usuário e redireciona para a página principal
                 mv.setViewName("redirect:/principal");
                 return mv;

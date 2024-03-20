@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import net.sf.jsqlparser.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import java.util.Optional;
 
 @Controller
@@ -23,6 +23,9 @@ public class TaskController {
 
     @Autowired
     private TaskRepository taskRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
     public ModelAndView login(){
@@ -64,6 +67,9 @@ public class TaskController {
             return mv;
         }
 
+        //criptografando antes de salvar
+        String senhaCriptografada = passwordEncoder.encode(task.getSenha());
+        task.setSenha(senhaCriptografada);
 
         // Lógica para salvar o usuário no banco de dados
         taskRepository.save(task);
