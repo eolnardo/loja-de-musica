@@ -1,6 +1,6 @@
 package br.senac.tialejo.controller;
 
-import br.senac.tialejo.model.Task;
+import br.senac.tialejo.model.User;
 import br.senac.tialejo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,36 +27,24 @@ public class UserController {
     @GetMapping("/login")
     public ModelAndView login(){
         ModelAndView mv = new ModelAndView("login");
-        //mv.addObject("task", new Task());
+
         return mv;
 
     }
-//    @PostMapping("/login")
-//    public ModelAndView create(@ModelAttribute @Validated Task task, BindingResult result) {
-//        ModelAndView mv = new ModelAndView("login");
-//        if (result.hasErrors()) {
-//            mv.setViewName("login");
-//            mv.addObject("task", task); // Adiciona o objeto Task de volta ao modelo
-//            mv.addObject("errors", result.getAllErrors()); // Adiciona os erros de validação ao modelo
-//            return mv;
-//        }
-//        userRepository.save(task);
-//        mv.setViewName("redirect:/principal");
-//        return mv;
-//    }
+
     @GetMapping("/cadastro-pessoa")
     public ModelAndView cadastro(){
        ModelAndView mv = new ModelAndView("cadastro-pessoa");
-       mv.addObject("task", new Task());
+       mv.addObject("user", new User());
         return mv;
 
     }
     @PostMapping("/cadastro-pessoa")
-    public ModelAndView cadastrarUsuario(@ModelAttribute @Validated Task task, BindingResult result) {
+    public ModelAndView cadastrarUsuario(@ModelAttribute @Validated User user, BindingResult result) {
         ModelAndView mv = new ModelAndView("cadastro-pessoa");
 
-        if (!task.getSenha().equals(task.getConfirmaSenha())) {
-            result.rejectValue("senha", "error.task", "As senhas não coincidem");
+        if (!user.getSenha().equals(user.getConfirmaSenha())) {
+            result.rejectValue("senha", "error.user", "As senhas não coincidem");
 
         }
         if (result.hasErrors()) {
@@ -65,11 +53,11 @@ public class UserController {
         }
 
         //criptografando antes de salvar
-        String senhaCriptografada = passwordEncoder.encode(task.getSenha());
-        task.setSenha(senhaCriptografada);
+        String senhaCriptografada = passwordEncoder.encode(user.getSenha());
+        user.setSenha(senhaCriptografada);
 
         // Lógica para salvar o usuário no banco de dados
-        userRepository.save(task);
+        userRepository.save(user);
 
         // Redireciona para a página principal após o cadastro bem-sucedido
         return new ModelAndView("redirect:/principal");
@@ -83,44 +71,38 @@ public class UserController {
 
     @GetMapping("/listar-usuarios")
     public ModelAndView listar(){
-        Iterable<Task> tasks = userRepository.findAll();
+        Iterable<User> users = userRepository.findAll();
         ModelAndView mv = new ModelAndView("listar-usuarios");
-        mv.addObject("tasks", tasks);
+        mv.addObject("users", users);
         return mv;
     }
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id){
         ModelAndView mv = new ModelAndView("edit");
-        Optional<Task> taskFinder = userRepository.findById(id);
+        Optional<User> taskFinder = userRepository.findById(id);
 
         if(taskFinder.isPresent()) {
-            Task task = taskFinder.get();
-            mv.addObject("task", task);
+            User user = taskFinder.get();
+            mv.addObject("user", user);
         }
 
         return mv;
     }
     @PostMapping("/edit")
-    public String update(Task task) {
-        Optional<Task> optionalTaskToUpdate = userRepository.findById(task.getId());
+    public String update(User user) {
+        Optional<User> optionalTaskToUpdate = userRepository.findById(user.getId());
         if (optionalTaskToUpdate.isPresent()) {
-            Task taskToUpdate = optionalTaskToUpdate.get();
-            taskToUpdate.setName(task.getName());
-            taskToUpdate.setEmail(task.getEmail());
-            taskToUpdate.setTelefone(task.getTelefone());
-            taskToUpdate.setRole(task.getRole());
-            taskToUpdate.setStatus(task.getStatus());
-            userRepository.save(taskToUpdate);
+            User userToUpdate = optionalTaskToUpdate.get();
+            userToUpdate.setName(user.getName());
+            userToUpdate.setEmail(user.getEmail());
+            userToUpdate.setTelefone(user.getTelefone());
+            userToUpdate.setRole(user.getRole());
+            userToUpdate.setStatus(user.getStatus());
+            userRepository.save(userToUpdate);
         }
         return "redirect:/listar-usuarios";
     }
-//    @PostMapping("/edit")
-//    public String delete(Task task) {
-//
-//       userRepository.deleteById(task.getId());
-//
-//        return "redirect:/listar-usuarios";
-//    }
+
 
 
 

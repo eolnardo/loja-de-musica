@@ -1,6 +1,6 @@
 package br.senac.tialejo.controller;
 
-import br.senac.tialejo.model.Task;
+import br.senac.tialejo.model.User;
 import br.senac.tialejo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,9 +24,9 @@ public class LoginController {
         ModelAndView mv = new ModelAndView();
 
         // Verifica se o usuário existe no banco de dados e se a senha está correta
-        Optional<Task> userOptional = userRepository.findByEmail(email);
+        Optional<User> userOptional = userRepository.findByEmail(email);
         if (userOptional.isPresent()) {
-            Task user = userOptional.get();
+            User user = userOptional.get();
             if (passwordEncoder.matches(senha, user.getSenha())) { // <- verificando senha criptografada
                 // Autentica o usuário e redireciona para a página principal
                 mv.setViewName("redirect:/principal");

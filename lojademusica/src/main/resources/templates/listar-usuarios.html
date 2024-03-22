@@ -61,15 +61,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr data-th-each="task : ${tasks}">
-                            <td data-th-text="${task.id}"></td>
-                            <td data-th-text="${task.name}"></td>
-                            <td data-th-text="${task.email}"></td>
-                            <td data-th-text="${task.telefone}"></td>
-                            <td data-th-text="${task.role}"></td>
-                            <td data-th-text="${task.status}"></td>
+                        <tr data-th-each="user : ${tasks}">
+                            <td data-th-text="${user.id}"></td>
+                            <td data-th-text="${user.name}"></td>
+                            <td data-th-text="${user.email}"></td>
+                            <td data-th-text="${user.telefone}"></td>
+                            <td data-th-text="${user.role}"></td>
+                            <td data-th-text="${user.status}"></td>
                             <td>
-                                <a th:href="@{'/edit/'+${task.id}}">Editar</a>
+                                <a th:href="@{'/edit/'+${user.id}}">Editar</a>
                             </td>
                         </tr>
                         </tbody>

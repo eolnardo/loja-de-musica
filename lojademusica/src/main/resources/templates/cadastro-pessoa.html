@@ -44,7 +44,7 @@
 				<div class="section pb-5 pt-5 pt-sm-2 text-center">
 
 					<h4 class="mb-3 pb-3">Cadastre-se</h4>
-					<form method="post" action="/cadastro-pessoa" th:object="${task}">
+					<form method="post" action="/cadastro-pessoa" th:object="${user}">
 						<div th:if="${errors}" class="error-message">
 							<ul>
 								<li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
