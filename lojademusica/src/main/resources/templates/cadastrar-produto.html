@@ -21,6 +21,12 @@
             border: 1px solid #ff0000;
             background-color: #ffe6e6;
         }
+
+		.error {
+			border: 1px solid #ff0000;
+			background-color: #ffe6e6;
+		}
+
 	</style>
 
 </head>
@@ -51,7 +57,7 @@
 							</ul>
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-style" placeholder="Nome do Produto" name="nome">
+							<input type="text" class="form-style" placeholder="Nome do Produto" name="nome" th:value="${produto.nome}">
 							<div th:if="${#fields.hasErrors('nome')}" class="error-message">
 								<ul>
 									<li th:each="error : ${#fields.errors('nome')}" th:text="${error}"></li>
@@ -59,7 +65,7 @@
 							</div>
 						</div>
 						<div class="form-group mt-2">
-							<input type="number" class="form-style" placeholder="Avaliação" name="avaliacao" oninput="substituirVirgulaPorPontoEArredondar(this)">
+							<input type="number" class="form-style" placeholder="Avaliação" name="avaliacao" th:value="${produto.avaliacao}" oninput="substituirVirgulaPorPontoEArredondar(this)">
 							<div th:if="${#fields.hasErrors('avaliacao')}" class="error-message">
 								<ul>
 									<li th:each="error : ${#fields.errors('avaliacao')}" th:text="${error}"></li>
@@ -91,7 +97,7 @@
 						</script>
 
 						<div class="form-group mt-2">
-							<input type="text" class="form-style" placeholder="Descrição do Produto" name="descricao">
+							<input type="text" class="form-style" placeholder="Descrição do Produto" name="descricao" th:value="${produto.descricao}">
 							<div th:if="${#fields.hasErrors('descricao')}" class="error-message">
 								<ul>
 									<li th:each="error : ${#fields.errors('descricao')}" th:text="${error}"></li>
@@ -113,7 +119,7 @@
 							</select>
 						</div>
 						<div class="form-group mt-2">
-							<input type="number" min="0" class="form-style" placeholder="Quantidade em Estoque" name="quantidade">
+							<input type="number" min="0" class="form-style" placeholder="Quantidade em Estoque" name="quantidade" th:value="${produto.quantidade}">
 							<div th:if="${#fields.hasErrors('quantidade')}" class="error-message">
 								<ul>
 									<li th:each="error : ${#fields.errors('quantidade')}" th:text="${error}"></li>
