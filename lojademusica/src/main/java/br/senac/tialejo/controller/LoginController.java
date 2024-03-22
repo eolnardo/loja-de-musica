@@ -19,6 +19,26 @@ public class LoginController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    private static Long ID;
+
+    private static String role;
+
+    public static String getRole() {
+        return role;
+    }
+
+    public static void setRole(String role) {
+        LoginController.role = role;
+    }
+
+    public static Long getID() {
+        return ID;
+    }
+
+    public static void setID(Long ID) {
+        LoginController.ID = ID;
+    }
+
     @PostMapping("/login")
     public ModelAndView login(@RequestParam("email") String email, @RequestParam("senha") String senha) {
         ModelAndView mv = new ModelAndView();
@@ -27,9 +47,25 @@ public class LoginController {
         Optional<User> userOptional = userRepository.findByEmail(email);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            if (passwordEncoder.matches(senha, user.getSenha())) { // <- verificando senha criptografada
+
+            setID(user.getId());
+
+            System.out.println(getID());
+
+            System.out.println(user.getRole());
+
+            setRole(user.getRole());
+
+            System.out.println("senha digitada: " + senha);
+            System.out.println("Senha do Usuário: " + user.getSenha());
+
+            if (passwordEncoder.matches(senha, user.getSenha()) && user.getRole().equals("ADMIN")) { // <- verificando senha criptografada
                 // Autentica o usuário e redireciona para a página principal
-                mv.setViewName("redirect:/principal");
+                mv.setViewName("redirect:/principal2");
+                return mv;
+            } else {
+                System.out.println("estou aqui");
+                mv.setViewName("redirect:/login");
                 return mv;
             }
         }
