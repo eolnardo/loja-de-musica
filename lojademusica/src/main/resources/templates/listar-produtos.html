@@ -31,8 +31,10 @@
                         <form action="/listar-produtos" method="GET">
                             <div class="search">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Buscar Produto" aria-label="Buscar Produto" aria-describedby="button-addon2">
-                                    <button class="btn btn-secondary" type="button" id="button-addon2">Buscar</button>
+                                    <form action="/listar-produtos" method="GET">
+                                        <input type="text" class="form-style" placeholder="Busca" name="q">
+                                        <button type="submit"><img src="/images/search.png" alt=""></button>
+                                    </form>
                                     <a th:href="@{/cadastrar-produto}"><img src="/images/add.png" alt=""></a>
                                 </div>
 
