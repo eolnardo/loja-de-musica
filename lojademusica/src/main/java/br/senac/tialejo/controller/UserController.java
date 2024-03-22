@@ -1,7 +1,7 @@
 package br.senac.tialejo.controller;
 
 import br.senac.tialejo.model.Task;
-import br.senac.tialejo.repository.TaskRepository;
+import br.senac.tialejo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,10 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Optional;
 
 @Controller
-public class TaskController {
+public class UserController {
 
     @Autowired
-    private TaskRepository taskRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -40,7 +40,7 @@ public class TaskController {
 //            mv.addObject("errors", result.getAllErrors()); // Adiciona os erros de validação ao modelo
 //            return mv;
 //        }
-//        taskRepository.save(task);
+//        userRepository.save(task);
 //        mv.setViewName("redirect:/principal");
 //        return mv;
 //    }
@@ -69,7 +69,7 @@ public class TaskController {
         task.setSenha(senhaCriptografada);
 
         // Lógica para salvar o usuário no banco de dados
-        taskRepository.save(task);
+        userRepository.save(task);
 
         // Redireciona para a página principal após o cadastro bem-sucedido
         return new ModelAndView("redirect:/principal");
@@ -83,7 +83,7 @@ public class TaskController {
 
     @GetMapping("/listar-usuarios")
     public ModelAndView listar(){
-        Iterable<Task> tasks = taskRepository.findAll();
+        Iterable<Task> tasks = userRepository.findAll();
         ModelAndView mv = new ModelAndView("listar-usuarios");
         mv.addObject("tasks", tasks);
         return mv;
@@ -91,7 +91,7 @@ public class TaskController {
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id){
         ModelAndView mv = new ModelAndView("edit");
-        Optional<Task> taskFinder =taskRepository.findById(id);
+        Optional<Task> taskFinder = userRepository.findById(id);
 
         if(taskFinder.isPresent()) {
             Task task = taskFinder.get();
@@ -102,7 +102,7 @@ public class TaskController {
     }
     @PostMapping("/edit")
     public String update(Task task) {
-        Optional<Task> optionalTaskToUpdate = taskRepository.findById(task.getId());
+        Optional<Task> optionalTaskToUpdate = userRepository.findById(task.getId());
         if (optionalTaskToUpdate.isPresent()) {
             Task taskToUpdate = optionalTaskToUpdate.get();
             taskToUpdate.setName(task.getName());
@@ -110,14 +110,14 @@ public class TaskController {
             taskToUpdate.setTelefone(task.getTelefone());
             taskToUpdate.setRole(task.getRole());
             taskToUpdate.setStatus(task.getStatus());
-            taskRepository.save(taskToUpdate);
+            userRepository.save(taskToUpdate);
         }
         return "redirect:/listar-usuarios";
     }
 //    @PostMapping("/edit")
 //    public String delete(Task task) {
 //
-//       taskRepository.deleteById(task.getId());
+//       userRepository.deleteById(task.getId());
 //
 //        return "redirect:/listar-usuarios";
 //    }

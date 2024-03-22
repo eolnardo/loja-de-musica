@@ -2,10 +2,6 @@ package br.senac.tialejo.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.format.annotation.NumberFormat;
 
 @Entity @Table(name = "FUNCIONARIO")
 public class Task {
@@ -21,8 +17,8 @@ public class Task {
     private String email;
     @Column(name = "TELEFONE")
     private Integer telefone;
-    @Column(name = "GRUPO")
-    private String grupo;
+    @Column(name = "ROLE")
+    private String role;
     @Column(name = "STATUS")
     private String status;
     @Column(name = "SENHA")
@@ -36,12 +32,12 @@ public class Task {
     }
 
 
-    public Task(Long id, String name, String email, Integer telefone, String grupo, String status, String senha, String confirmaSenha) {
+    public Task(Long id, String name, String email, Integer telefone, String role, String status, String senha, String confirmaSenha) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.telefone = telefone;
-        this.grupo = grupo;
+        this.role = role;
         this.status = status;
         this.senha = senha;
         this.confirmaSenha = confirmaSenha;
@@ -80,12 +76,12 @@ public class Task {
         this.telefone = telefone;
     }
 
-    public String getGrupo() {
-        return grupo;
+    public String getRole() {
+        return role;
     }
 
-    public void setGrupo(String grupo) {
-        this.grupo = grupo;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getStatus() {
