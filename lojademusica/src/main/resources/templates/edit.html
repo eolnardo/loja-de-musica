@@ -1,59 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
   <title>Tialejo ® - Editar Funcionário</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="shortcut icon" href="/images/cd.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="shortcut icon" href="../static/images/cd.ico" type="image/x-icon">
 </head>
+
 <body>
-<nav class="navbar">
-  <div class="left-navbar">
-    <img th:src="@{/images/cd.ico}" alt="Logo">
-    <h1>Tialejo ®</h1>
-  </div>
-  <div class="right-navbar">
-    <a href="/principal" class="btn mt-4">Voltar</a>
-    <a href="" class="btn mt-4">Logout</a>
-  </div>
-</nav>
-<section class="content">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-6">
-        <div class="section text-center">
-          <h1 class="mb-0 pb-3"><span>Editar Funcionário</span></h1>
-          <form method="post" action="/edit" th:object="${user}">
-            <input type="hidden" th:field="*{id}">
-            <div class="form-group">
-              <label for="name">Nome</label>
-              <input type="text" class="form-control" id="name" name="name" th:field="*{name}">
-            </div>
-            <div class="form-group">
-              <label for="email">E-mail</label>
-              <input type="email" class="form-control" id="email" name="email" th:field="*{email}">
-            </div>
-            <div class="form-group">
-              <label for="telefone">Telefone</label>
-              <input type="text" class="form-control" id="telefone" name="telefone" th:field="*{telefone}">
-            </div>
-            <div class="form-group">
-              <label for="grupo">Grupo</label>
-              <input type="text" class="form-control" id="grupo" name="role" th:field="*{role}">
-            </div>
-            <div class="form-group">
-              <label for="status">Status</label>
-              <input type="text" class="form-control" id="status" name="status" th:field="*{status}">
-            </div>
-            <button type="submit" class="btn btn-primary">Salvar</button>
-          </form>
+  <nav class="navbar">
+    <div class="left-navbar">
+      <img th:src="@{/images/cd.ico}" alt="Logo">
+      <h1>Tialejo ®</h1>
+    </div>
+    <div class="right-navbar">
+      <a href="/principal" class="btn mt-4">Voltar</a>
+      <a href="" class="btn mt-4">Logout</a>
+    </div>
+  </nav>
+  <section class="content">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="section text-center" style="margin-top: 20%;">
+            <h1 class="mb-0 pb-3"><span>Editar Funcionário</span></h1>
+            <form method="post" action="/edit" th:object="${user}">
+              <input type="hidden" th:field="*{id}">
+              <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" class="form-control bg-dark" id="name" name="name" th:field="*{name}">
+              </div>
+              <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" class="form-control bg-dark" id="email" name="email" th:field="*{email}">
+              </div>
+              <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="text" class="form-control bg-dark" id="telefone" name="telefone" th:field="*{telefone}">
+              </div>
+              <div class="form-group">
+                <label for="grupo">Grupo</label>
+                <input type="text" class="form-control bg-dark" id="grupo" name="role" th:field="*{role}">
+              </div>
+              <div class="form-group">
+                <label for="status">Status</label>
+                <input type="text" class="form-control bg-dark" id="status" name="status" th:field="*{status}">
+              </div>
+              <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Salvar</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 </body>
+
 </html>

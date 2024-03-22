@@ -1,19 +1,35 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 
+html {
+    height: 100vh;
+    width: 100%;
+    list-style: none;
+}
+
+:root {
+    --azul-principal: #40cfff;
+    --preto: #000;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
     line-height: 1.7;
-    color: #40cfff;
+    color: #000;
     background-color: #1f2029;
+    height: 100vh;
+    width: 100%;
 }
+
+
 a:hover {
     text-decoration: none;
     cursor: pointer;
+    color: var(--azul-principal);
 }
 
 .link {
-    color: #40cfff;
+    color: var(--azul-principal);
 }
 
 .link:hover {
@@ -29,6 +45,7 @@ h1 {
     font-size: 25px;
     font-weight: 700;
     align-self: center;
+    color: var(--azul-principal);
 }
 
 h4 {
@@ -38,6 +55,16 @@ h4 {
 h6 span {
     padding: 0 20px;
     font-weight: 700;
+}
+
+nav h1 {
+    color: var(--preto);
+}
+
+form {}
+
+ul, li{
+    list-style: none;
 }
 
 .navbar {
@@ -58,7 +85,8 @@ h6 span {
     width: 2rem;
 }
 
-.left-navbar, .right-navbar{
+.left-navbar,
+.right-navbar {
     padding: 0;
     margin-left: 1rem;
     display: flex;
@@ -66,11 +94,11 @@ h6 span {
     align-items: center;
 }
 
-.right-navbar{
+.right-navbar {
     margin-top: -1.3rem;
 }
 
-.right-navbar a{
+.right-navbar a {
     cursor: pointer;
 }
 
@@ -78,10 +106,13 @@ h6 span {
     position: relative;
     width: 100%;
     display: block;
+    align-items: center;
+    justify-content: cen;
 }
 
 .container {
     gap: 1rem;
+
 }
 
 .full-height {
@@ -247,14 +278,13 @@ h6 span {
     display: -ms-inline-flexbox;
     display: inline-flex;
     align-items: center;
-    background-color: #40cfff;
-    color: #000000;
+    background-color: var(--azul-principal);
 }
 
 .btn:hover {
-    background-color: #000000;
-    color: #40cfff;
+    color: var(--azul-principal);
     box-shadow: 0 8px 24px 0 rgba(16, 39, 112, .2);
+    cursor: pointer;
 }
 
 table {
@@ -264,7 +294,7 @@ table {
 }
 
 th,
- td {
+td {
     border: 1px solid #dddddd;
     text-align: center;
     padding: 8px;
@@ -275,20 +305,58 @@ th {
     background-color: #f0f8ff;
 }
 
-.search{
-    margin-top: 20px; /* Ajuste da margem superior para mover o campo de busca um pouco para cima */
-                margin-bottom: 10px; /* Margem inferior para dar espaço entre o campo de busca e a tabela */
-                display: flex;
-                flex-direction: row;
-                align-items: center;
+.search {
+    margin-top: 20px;
+    /* Ajuste da margem superior para mover o campo de busca um pouco para cima */
+    margin-bottom: 10px;
+    /* Margem inferior para dar espaço entre o campo de busca e a tabela */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
 }
 
-.search img{
+.search img {
     background-color: white;
     height: 50px;
     border-radius: 50%;
     box-shadow: 0 8px 24px 0 rgba(16, 39, 112, .2);
 }
 
+.error-message {
+    color: #ff0000;
+    font-size: 12px;
+    margin-top: 5px;
+}
 
+.form-group.error input.form-style {
+    border: 1px solid #ff0000;
+}
 
+.section {
+    margin-top: 50px;
+    color: var(--azul-principal);
+    /* Ajuste o espaçamento superior conforme necessário */
+}
+
+th {
+    background-color: var(--azul-principal);
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    color: white;
+}
+
+.inputImagem{
+    row-gap: 1rem;
+}
+
+.inputImagem, .selectImagem {
+    display: grid;
+    flex-direction: row;
+}

@@ -7,40 +7,26 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-	<link rel="stylesheet" th:href="@{/CSS/style.css}">
+	<link rel="stylesheet" href="../static/css/style.css">
 	<link rel="shortcut icon" th:href="@{/images/cd.ico}" type="image/x-icon">
-
-	<style>
-		.error-message {
-            color: #ff0000;
-            font-size: 12px;
-            margin-top: 5px;
-        }
-
-        .form-group.error input.form-style {
-            border: 1px solid #ff0000;
-            background-color: #ffe6e6;
-        }
-	</style>
 
 </head>
 
 <body>
-<nav class="navbar">
-	<div class="left-navbar">
-		<img th:src="@{/images/cd.ico}" alt="Logo">
-		<h1>Tialejo ®</h1>
-
-	<div class="right-navbar">
-		<a href="" class="btn mt-4">Login</a>
-		<a href="" class="btn mt-4">Logout</a>
-	</div>
-	</div>
-</nav>
+	<nav class="navbar">
+		<div class="left-navbar">
+		  <img th:src="@{/images/cd.ico}" alt="Logo">
+		  <h1>Tialejo ®</h1>
+		</div>
+		<div class="right-navbar">
+		  <a href="/principal" class="btn mt-4">Voltar</a>
+		  <a href="" class="btn mt-4">Logout</a>
+		</div>
+	  </nav>
 <section class="content">
 	<div class="container">
 		<div class="row full-height justify-content-center">
-			<div class="col-12 text-center align-self-center py-5">
+			<div class="col-12 text-center align-self-center py-5" style="max-width: 50%; margin-left: auto; margin-right: auto;">
 				<div class="section pb-5 pt-5 pt-sm-2 text-center">
 
 					<h4 class="mb-3 pb-3">Cadastre-se</h4>
