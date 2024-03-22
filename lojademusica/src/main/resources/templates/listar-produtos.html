@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Tialejo ® - Lista de Produtos</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/images/cd.ico" type="image/x-icon">
+    <style>
+        .section {
+            margin-top: 50px; /* Ajuste o espaçamento superior conforme necessário */
+        }
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar">
+    <div class="left-navbar">
+        <img th:src="@{/images/cd.ico}" alt="Logo">
+        <h1>Tialejo ®</h1>
+    </div>
+    <div class="right-navbar">
+        <a href="principal2.html" class="btn mt-4">Voltar</a>
+        <a href="" class="btn mt-4">Logout</a>
+    </div>
+</nav>
+<section class="content">
+    <div class="container">
+        <div class="row full-height justify-content-center align-items-center">
+            <div class="col-12 text-center align-self-center py-5">
+                <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                    <h1 class="mb-0 pb-3"><span>Listar Produtos</span></h1>
+                    <div class="search">
+                        <form action="/listar-produtos" method="GET">
+                            <input type="text" class="form-style" placeholder="Busca" name="q">
+                            <button type="submit"><img src="/images/search.png" alt=""></button>
+                        </form>
+                        <a th:href="@{/cadastrar-produto}"><img src="/images/add.png" alt=""></a>
+                    </div>
+
+                    <table class="center-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Avaliação</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Preço</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-th-each="produto : ${produtos}">
+                            <td data-th-text="${produto.id}"></td>
+                            <td data-th-text="${produto.nome}"></td>
+                            <td data-th-text="${produto.avaliacao}"></td>
+                            <td data-th-text="${produto.descricao}"></td>
+                            <td data-th-text="${produto.preco}"></td>
+                            <td data-th-text="${produto.status}"></td>
+                            <td>
+                                <a th:href="@{'/editProduto/'+${produto.id}}">Editar</a>
+                                <a th:href="@{'/toggleStatus?id=' + ${produto.id} + '&action=reactivate'}">Reativar</a>
+                                <a th:href="@{'/toggleStatus?id=' + ${produto.id} + '&action=deactivate'}">Desativar</a>
+                                <a th:href="@{'/produto/' + ${produto.id}}">Apagar</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+
+</html>

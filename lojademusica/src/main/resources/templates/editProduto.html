@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Tialejo ® - Editar Funcionário</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/images/cd.ico" type="image/x-icon">
+</head>
+<body>
+<nav class="navbar">
+  <div class="left-navbar">
+    <img th:src="@{/images/cd.ico}" alt="Logo">
+    <h1>Tialejo ®</h1>
+  </div>
+  <div class="right-navbar">
+    <a href="/principal" class="btn mt-4">Voltar</a>
+    <a href="" class="btn mt-4">Logout</a>
+  </div>
+</nav>
+<section class="content">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="section text-center">
+          <h1 class="mb-0 pb-3"><span>Editar Produto</span></h1>
+          <form method="post" action="/editProduto" th:object="${produto}">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input type="text" class="form-control" id="nome" name="nome" th:field="*{nome}">
+            </div>
+            <div class="form-group">
+              <label for="avaliacao">Avaliação</label>
+              <input type="number" class="form-style" placeholder="Avaliação" id="avaliacao" name="avaliacao" oninput="substituirVirgulaPorPontoEArredondar(this)" th:field="*{avaliacao}">
+              <script>
+                function substituirVirgulaPorPontoEArredondar(input) {
+                  // Substituir vírgulas por pontos
+                  input.value = input.value.replace(',', '.');
+
+                  // Converter o valor para float
+                  var valor = parseFloat(input.value);
+
+                  // Arredondar para cima ou para baixo, dependendo do valor fracionário
+                  if (!isNaN(valor)) {
+                    // Se o valor não for NaN (não é um número), arredondamos
+                    var parteDecimal = valor % 1; // Obtém a parte decimal
+                    if (parteDecimal > 0) {
+                      // Se houver parte decimal, arredonda para cima
+                      input.value = Math.ceil(valor * 2) / 2; // Arredonda para cima para o próximo meio
+                    } else {
+                      // Se não houver parte decimal, mantemos o valor
+                      input.value = valor;
+                    }
+                  }
+                }
+              </script>
+            </div>
+            <div class="form-group">
+              <label for="descricao">Descrição</label>
+              <input type="text" class="form-control" id="descricao" name="descricao" th:field="*{descricao}">
+            </div>
+            <div class="form-group">
+              <label for="preco">Preço</label>
+              <input type="number" min="0" max="100" step="1" class="form-style" id="preco" name="preco" th:field="*{preco}">
+            </div>
+            <div class="form-group mt-2">
+              <select name="status">
+                <option value="true">Ativo</option>
+                <option value="false">Inativo</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
