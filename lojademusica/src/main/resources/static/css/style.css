@@ -25,7 +25,7 @@ body {
 a:hover {
     text-decoration: none;
     cursor: pointer;
-    color: var(--azul-principal);
+    color: var(--preto);
 }
 
 .link {
@@ -34,6 +34,7 @@ a:hover {
 
 .link:hover {
     color: #c4c3ca;
+
 }
 
 p {
@@ -100,6 +101,7 @@ ul, li{
 
 .right-navbar a {
     cursor: pointer;
+    z-index: 999;
 }
 
 .content {
@@ -283,6 +285,7 @@ ul, li{
 
 .btn:hover {
     color: var(--azul-principal);
+    background-color: var(--preto);
     box-shadow: 0 8px 24px 0 rgba(16, 39, 112, .2);
     cursor: pointer;
 }

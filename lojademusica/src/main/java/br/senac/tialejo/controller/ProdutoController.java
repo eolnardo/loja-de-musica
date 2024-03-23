@@ -53,11 +53,12 @@ public class ProdutoController {
         produtoRepository.save(produto);
 
         // Redireciona para a página principal após o cadastro bem-sucedido
+
+
         return new ModelAndView("redirect:/principal2");
     }
 
     @GetMapping("/listar-produtos")
-
     public ModelAndView listar(@RequestParam(name = "q", required = false) String query) {
        // Por exemplo, você pode passá-la para o repositório de produtos para obter produtos correspondentes à consulta
 
@@ -84,6 +85,33 @@ public class ProdutoController {
         return mv;
     }
 
+    @GetMapping("/listar-produtos-estoquista")
+    public ModelAndView listarEstoquista(@RequestParam(name = "q", required = false) String query) {
+        // Por exemplo, você pode passá-la para o repositório de produtos para obter produtos correspondentes à consulta
+
+        Iterable<Produto> produtos = produtoRepository.findAll();
+
+        if (query != null && !query.isEmpty()) {
+            produtos = produtoRepository.findAll();
+
+            ArrayList<Produto> produtosEncontrados = new ArrayList<>();
+
+            for (Produto produto: produtos
+            ) {
+                if(produto.getNome().contains(query)) produtosEncontrados.add(produto);
+            }
+
+            produtos = produtosEncontrados;
+        } else {
+            // Se não houver consulta, apenas liste todos os produtos
+            produtos = produtoRepository.findAll();
+        }
+
+        ModelAndView mv = new ModelAndView("listar-produtos-estoquista.html");
+        mv.addObject("produtos", produtos);
+        return mv;
+    }
+
     @GetMapping("/editProduto/{id}")
     public ModelAndView edit(@PathVariable("id") Long id){
         ModelAndView mv = new ModelAndView("editProduto");
@@ -96,6 +124,20 @@ public class ProdutoController {
 
         return mv;
     }
+
+    @GetMapping("/editProduto-estoquista/{id}")
+    public ModelAndView editEstoquista(@PathVariable("id") Long id){
+        ModelAndView mv = new ModelAndView("editProduto");
+        Optional<Produto> produtoFinder = produtoRepository.findById(id);
+
+        if(produtoFinder.isPresent()) {
+            Produto produto = produtoFinder.get();
+            mv.addObject("produto", produto);
+        }
+
+        return mv;
+    }
+
     @PostMapping("/editProduto")
     public String update(Produto produto) {
         Optional<Produto> optionalprodutoToUpdate = produtoRepository.findById(produto.getId());
@@ -109,6 +151,10 @@ public class ProdutoController {
             produtoToUpdate.setQuantidade(produto.getQuantidade());
             produtoRepository.save(produtoToUpdate);
         }
+
+
+        if (LoginController.getRole().equalsIgnoreCase("Estoquista")) return "redirect:/listar-produtos-estoquista";
+
         return "redirect:/listar-produtos";
     }
 
@@ -125,6 +171,21 @@ public class ProdutoController {
             produtoRepository.save(produto);
         }
         return "redirect:/listar-produtos";
+    }
+
+    @GetMapping("/toggleStatusEstoquista")
+    public String toggleStatusEstoquista(@RequestParam Long id, @RequestParam String action) {
+        Optional<Produto> optionalProduto = produtoRepository.findById(id);
+        if (optionalProduto.isPresent()) {
+            Produto produto = optionalProduto.get();
+            if ("reactivate".equals(action)) {
+                produto.setStatus(true);
+            } else if ("deactivate".equals(action)) {
+                produto.setStatus(false);
+            }
+            produtoRepository.save(produto);
+        }
+        return "redirect:/listar-produtos-estoquista";
     }
 
     @GetMapping("/produto/{id}")

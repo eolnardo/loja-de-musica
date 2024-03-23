@@ -56,11 +56,13 @@ public class UserController {
         String senhaCriptografada = passwordEncoder.encode(user.getSenha());
         user.setSenha(senhaCriptografada);
 
+        user.setRole("ADMIN");
+
         // Lógica para salvar o usuário no banco de dados
         userRepository.save(user);
 
         // Redireciona para a página principal após o cadastro bem-sucedido
-        return new ModelAndView("redirect:/principal");
+        return new ModelAndView("redirect:/login");
     }
 
 
@@ -100,6 +102,7 @@ public class UserController {
             userToUpdate.setStatus(user.getStatus());
             userRepository.save(userToUpdate);
         }
+
         return "redirect:/listar-usuarios";
     }
 

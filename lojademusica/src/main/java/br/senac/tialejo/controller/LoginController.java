@@ -56,13 +56,20 @@ public class LoginController {
 
             setRole(user.getRole());
 
+            System.out.println("email:" + user.getEmail());
             System.out.println("senha digitada: " + senha);
             System.out.println("Senha do Usuário: " + user.getSenha());
 
-            if (passwordEncoder.matches(senha, user.getSenha()) && user.getRole().equals("ADMIN")) { // <- verificando senha criptografada
+            if (passwordEncoder.matches(senha, user.getSenha())) { // <- verificando senha criptografada
                 // Autentica o usuário e redireciona para a página principal
-                mv.setViewName("redirect:/principal2");
-                return mv;
+                if(user.getRole().equals("ADMIN")) {
+                    mv.setViewName("redirect:/principal2");
+                    return mv;
+                } else if (user.getRole().equals("ESTOQUISTA")) {
+                    System.out.println("estou no estoquista");
+                    mv.setViewName("redirect:/principal");
+                    return mv;
+                }
             } else {
                 System.out.println("estou aqui");
                 mv.setViewName("redirect:/login");

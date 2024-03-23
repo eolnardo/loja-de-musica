@@ -32,12 +32,12 @@
               <input type="hidden" th:field="*{id}">
               <div class="form-group">
                 <label for="nome">Nome</label>
-                <input type="text" class="form-control bg-dark" id="nome" name="nome" placeholder="Nome" th:field="*{nome}">
+                <input type="text" class="form-control bg-dark" id="nome" name="nome" placeholder="Nome" th:field="*{nome}" readonly>
               </div>
               <div class="form-group">
                 <label for="avaliacao">Avaliação</label>
                 <input type="number" class="form-style bg-dark" placeholder="Avaliação" id="avaliacao" name="avaliacao"
-                  oninput="substituirVirgulaPorPontoEArredondar(this)" th:field="*{avaliacao}">
+                  oninput="substituirVirgulaPorPontoEArredondar(this)" th:field="*{avaliacao}" readonly>
                 <script>
                   function substituirVirgulaPorPontoEArredondar(input) {
                     // Substituir vírgulas por pontos
@@ -63,17 +63,21 @@
               </div>
               <div class="form-group">
                 <label for="descricao">Descrição</label>
-                <input type="text" class="form-control bg-dark" id="descricao" name="descricao" placeholder="Descrição" th:field="*{descricao}">
+                <input type="text" class="form-control bg-dark" id="descricao" name="descricao" placeholder="Descrição" th:field="*{descricao}" readonly>
               </div>
               <div class="form-group">
                 <label for="preco">Preço</label>
                 <input type="number" min="0" max="100" step="1" class="form-style bg-dark" id="preco" name="preco" placeholder="Preço"
-                  th:field="*{preco}">
+                  th:field="*{preco}" readonly>
+              </div>
+              <div class="form-group">
+                <label for="quantidade">Quantidade</label>
+                <input type="number" class="form-control" id="quantidade" name="quantidade" th:field="*{quantidade}">
               </div>
               <div class="form-group">
                 <label for="preco">Selecionar Status</label>
                 <div>
-                  <select class="form-select form-select-sm bg-dark" aria-label="Seleção Status" style="width: 80%;">
+                  <select class="form-select form-select-sm bg-dark" aria-label="Seleção Status" style="width: 80%;" readonly>
                     <option selected>Selecionar Status</option>
                     <option value="true">Ativo</option>
                     <option value="false">Inativo</option>
