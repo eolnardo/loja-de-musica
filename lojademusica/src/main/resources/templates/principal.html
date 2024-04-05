@@ -13,8 +13,14 @@
 
 <body>
     <nav class="navbar">
-        <img src="../static/images/cd.ico" alt="Logo">
-        <h1>Tialejo ®</h1>
+        <a th:href="@{'/'}">
+            <div class="left-navbar">
+        
+                <img  th:src="@{/images/cd.ico}" alt="Logo">
+                <h1 class="mt-2">Tialejo ®</h1>
+        
+            </div>
+            </a>
     </nav>
     <section class="content">
         <div class="container">
