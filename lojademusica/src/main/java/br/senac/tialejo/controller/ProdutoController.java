@@ -31,6 +31,9 @@ public class ProdutoController {
         return "principal2";
     }
 
+    @GetMapping("tela-produto")
+    public String telaProduto(){return "tela-produto";}
+
     @GetMapping("/cadastrar-produto")
     public ModelAndView cadastro(){
         ModelAndView mv = new ModelAndView("cadastrar-produto");

@@ -32,17 +32,19 @@
             <div class="slides" data-slides-container>
                 <div class="slide">
                     <div class="conteudo">
-                        <img src="./images/GAME.jpg" alt="GAME">
+                        <img th:src="@{/static/images/blue.jpg}" alt="GAME">
+                        <h2>oie</h2>
                     </div>
                 </div>
                 <div class="slide">
                     <div class="conteudo">
-                        <img src="./images/blue.jpg" alt="">
+                        <img src="../static/images/product.png"  alt="imagem principal do produto">
+                        <h2>oie2</h2>
                     </div>
                 </div>
                 <div class="slide">
                     <div class="conteudo">
-                        <img src="./images/please.jpg" alt="Please love me">
+                        <h2>oie3</h2>
                     </div>
                 </div>
             </div>
@@ -60,7 +62,7 @@
         </div>
         <div class="informações">
             <h3 style="color: rgb(234, 18, 18)">Preço: 300,00</h3>
-            <h4>Avaliações: 5/5 <i class="fas fa-star"></i></h4>
+            <h4>Avaliações: 5/5 <i class="fa-solid fa-star"></i></h4>
 
         </div>
         <div class="informações">
@@ -72,7 +74,8 @@
     </div>
 </div>
 
-<script src="/./js/carrousel.js"></script>
+<script th:src="@{js/carrousel.js}"></script>
+
 </body>
 
 </html>
