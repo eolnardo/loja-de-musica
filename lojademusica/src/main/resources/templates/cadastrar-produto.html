@@ -32,10 +32,15 @@
 
 <body>
 	<nav class="navbar">
+		<a th:href="@{'/'}">
+
 		<div class="left-navbar">
+
 			<img th:src="@{/images/cd.ico}" alt="Logo">
 			<h1>Tialejo ®</h1>
+
 		</div>
+		</a>
 		<div class="right-navbar">
 			<a th:href="@{'/principal'}" class="btn mt-4" style="z-index: 999">Voltar</a>
 			<a th:href="@{'/login'}" class="btn mt-4" style="z-index: 999">Logout</a>
