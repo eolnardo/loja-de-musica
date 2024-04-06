@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 
 
@@ -41,6 +42,11 @@ public class Produto {
     @Column(name = "status")
     @NotNull(message = "Quantidade não pode ser nula!")
     private boolean status = false;
+
+
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<Image> imageList;
 
     public Produto() {
     }

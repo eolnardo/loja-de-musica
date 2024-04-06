@@ -1,12 +1,17 @@
 package br.senac.tialejo.controller;
 
+import br.senac.tialejo.Services.ImageService;
+import br.senac.tialejo.model.Image;
 import br.senac.tialejo.model.Produto;
+import br.senac.tialejo.repository.ImageRepository;
 import br.senac.tialejo.repository.ProdutoRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +21,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+import javax.sql.rowset.serial.SerialException;
+import java.io.IOException;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -23,6 +32,8 @@ import java.util.Optional;
 public class ProdutoController {
     @Autowired
     private ProdutoRepository produtoRepository;
+    @Autowired
+    private ImageService imageService;
 
     private static final Logger logger = LoggerFactory.getLogger(ProdutoController.class);
 
@@ -43,7 +54,10 @@ public class ProdutoController {
     }
 
     @PostMapping("/cadastrar-produto")
-    public ModelAndView cadastrarProduto(@ModelAttribute @Validated Produto produto, BindingResult result) {
+    public ModelAndView cadastrarProduto(HttpServletRequest request,
+                                         @RequestParam("image") MultipartFile file,
+                                         @ModelAttribute @Validated Produto produto,
+                                         BindingResult result) throws IOException, SerialException, SQLException {
         ModelAndView mv = new ModelAndView("cadastrar-produto");
 
 
@@ -52,7 +66,12 @@ public class ProdutoController {
             // Se houver erros de validação, retorna para a mesma página de cadastro com os erros
             return mv;
         }
+        byte[] bytes = file.getBytes();
+        Blob blob = new javax.sql.rowset.serial.SerialBlob(bytes);
 
+        Image image = new Image();
+        image.setImage(blob);
+        imageService.create(image);
         produtoRepository.save(produto);
 
         // Redireciona para a página principal após o cadastro bem-sucedido
@@ -74,13 +93,16 @@ public class ProdutoController {
 
             for (Produto produto: produtos
                  ) {
-                    if(produto.getNome().contains(query)) produtosEncontrados.add(produto);
+                    if(produto.getNome().contains(query))
+                        produtosEncontrados.add(produto);
+
             }
 
             produtos = produtosEncontrados;
         } else {
             // Se não houver consulta, apenas liste todos os produtos
             produtos = produtoRepository.findAll();
+
         }
 
         ModelAndView mv = new ModelAndView("listar-produtos.html");
@@ -117,8 +139,10 @@ public class ProdutoController {
 
     @GetMapping("/editProduto/{id}")
     public ModelAndView edit(@PathVariable("id") Long id){
+
         ModelAndView mv = new ModelAndView("editProduto");
         Optional<Produto> produtoFinder = produtoRepository.findById(id);
+
 
         if(produtoFinder.isPresent()) {
             Produto produto = produtoFinder.get();
@@ -127,6 +151,7 @@ public class ProdutoController {
 
         return mv;
     }
+    
 
     @GetMapping("/editProduto-estoquista/{id}")
     public ModelAndView editEstoquista(@PathVariable("id") Long id){

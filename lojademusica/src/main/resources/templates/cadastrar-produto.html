@@ -2,7 +2,7 @@
 <html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
-	<title>Tialejo ® - Cadastro de Produto</title>
+	<title>Tialejo ® - Cadastro</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
@@ -31,133 +31,122 @@
 </head>
 
 <body>
-	<nav class="navbar">
-		<a th:href="@{'/'}">
+<nav class="navbar">
+	<div class="left-navbar">
+		<img th:src="@{/images/cd.ico}" alt="Logo">
+		<h1>Tialejo ®</h1>
+	</div>
+	<div class="right-navbar">
+		<a th:href="@{'/principal'}" class="btn mt-4" style="z-index: 999">Voltar</a>
+		<a th:href="@{'/login'}" class="btn mt-4" style="z-index: 999">Logout</a>
+	</div>
+</nav>
+<section class="content">
+	<div class="container">
+		<div class="row full-height justify-content-center">
+			<div class="col-12 text-center align-self-center py-5">
+				<div class="section pb-5 pt-5 pt-sm-2 text-center"
+					 style="max-width: 50%; margin-left: auto; margin-right: auto;">
 
-		<div class="left-navbar">
-
-			<img th:src="@{/images/cd.ico}" alt="Logo">
-			<h1>Tialejo ®</h1>
-
-		</div>
-		</a>
-		<div class="right-navbar">
-			<a th:href="@{'/principal'}" class="btn mt-4" style="z-index: 999">Voltar</a>
-			<a th:href="@{'/login'}" class="btn mt-4" style="z-index: 999">Logout</a>
-		</div>
-	</nav>
-	<section class="content">
-		<div class="container">
-			<div class="row full-height justify-content-center">
-				<div class="col-12 text-center align-self-center py-5">
-					<div class="section pb-5 pt-5 pt-sm-2 text-center"
-						style="max-width: 50%; margin-left: auto; margin-right: auto;">
-
-						<h4 class="mb-3 pb-3">Cadastre um produto</h4>
-						<form method="post" action="/cadastrar-produto" th:object="${produto}">
-							<div th:if="${errors}" class="error-message">
+					<h4 class="mb-3 pb-3">Cadastre um produto</h4>
+					<form method="post" action="/cadastrar-produto" th:object="${produto}" enctype="multipart/form-data">
+						<div th:if="${errors}" class="error-message">
+							<ul>
+								<li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+							</ul>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-style" placeholder="Nome do Produto" name="nome"
+								   th:value="${produto.nome}">
+							<div th:if="${#fields.hasErrors('nome')}" class="error-message">
 								<ul>
-									<li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+									<li th:each="error : ${#fields.errors('nome')}" th:text="${error}"></li>
 								</ul>
 							</div>
-							<div class="form-group">
-								<input type="text" class="form-style" placeholder="Nome do Produto" name="nome"
-									th:value="${produto.nome}">
-								<div th:if="${#fields.hasErrors('nome')}" class="error-message">
-									<ul>
-										<li th:each="error : ${#fields.errors('nome')}" th:text="${error}"></li>
-									</ul>
-								</div>
+						</div>
+						<div class="form-group mt-2">
+							<input type="number" class="form-style" placeholder="Avaliação" name="avaliacao"
+								   th:value="${produto.avaliacao}"
+								   oninput="substituirVirgulaPorPontoEArredondar(this)">
+							<div th:if="${#fields.hasErrors('avaliacao')}" class="error-message">
+								<ul>
+									<li th:each="error : ${#fields.errors('avaliacao')}" th:text="${error}"></li>
+								</ul>
 							</div>
-							<div class="form-group mt-2">
-								<input type="number" class="form-style" placeholder="Avaliação" name="avaliacao"
-									th:value="${produto.avaliacao}"
-									oninput="substituirVirgulaPorPontoEArredondar(this)">
-								<div th:if="${#fields.hasErrors('avaliacao')}" class="error-message">
-									<ul>
-										<li th:each="error : ${#fields.errors('avaliacao')}" th:text="${error}"></li>
-									</ul>
-								</div>
-							</div>
+						</div>
 
-							<script>
-								function substituirVirgulaPorPontoEArredondar(input) {
-									// Substituir vírgulas por pontos
-									input.value = input.value.replace(',', '.');
+						<script>
+							function substituirVirgulaPorPontoEArredondar(input) {
+								// Substituir vírgulas por pontos
+								input.value = input.value.replace(',', '.');
 
-									// Converter o valor para float
-									var valor = parseFloat(input.value);
+								// Converter o valor para float
+								var valor = parseFloat(input.value);
 
-									// Arredondar para cima ou para baixo, dependendo do valor fracionário
-									if (!isNaN(valor)) {
-										// Se o valor não for NaN (não é um número), arredondamos
-										var parteDecimal = valor % 1; // Obtém a parte decimal
-										if (parteDecimal > 0) {
-											// Se houver parte decimal, arredonda para cima
-											input.value = Math.ceil(valor * 2) / 2; // Arredonda para cima para o próximo meio
-										} else {
-											// Se não houver parte decimal, mantemos o valor
-											input.value = valor;
-										}
+								// Arredondar para cima ou para baixo, dependendo do valor fracionário
+								if (!isNaN(valor)) {
+									// Se o valor não for NaN (não é um número), arredondamos
+									var parteDecimal = valor % 1; // Obtém a parte decimal
+									if (parteDecimal > 0) {
+										// Se houver parte decimal, arredonda para cima
+										input.value = Math.ceil(valor * 2) / 2; // Arredonda para cima para o próximo meio
+									} else {
+										// Se não houver parte decimal, mantemos o valor
+										input.value = valor;
 									}
 								}
-							</script>
+							}
+						</script>
 
-							<div class="form-group mt-2">
-								<input type="text" class="form-style" placeholder="Descrição do Produto"
-									name="descricao" th:value="${produto.descricao}">
-								<div th:if="${#fields.hasErrors('descricao')}" class="error-message">
-									<ul>
-										<li th:each="error : ${#fields.errors('descricao')}" th:text="${error}"></li>
-									</ul>
-								</div>
+						<div class="form-group mt-2">
+							<input type="text" class="form-style" placeholder="Descrição do Produto"
+								   name="descricao" th:value="${produto.descricao}">
+							<div th:if="${#fields.hasErrors('descricao')}" class="error-message">
+								<ul>
+									<li th:each="error : ${#fields.errors('descricao')}" th:text="${error}"></li>
+								</ul>
 							</div>
-							<div class="form-group mt-2">
-								<input type="number" min="0" max="100" step="1" class="form-style"
-									placeholder="Preço do Produto" name="preco">
-								<div th:if="${#fields.hasErrors('preco')}" class="error-message">
-									<ul>
-										<li th:each="error : ${#fields.errors('preco')}" th:text="${error}"></li>
-									</ul>
-								</div>
+						</div>
+						<div class="form-group mt-2">
+							<input type="number" min="0" max="100" step="1" class="form-style"
+								   placeholder="Preço do Produto" name="preco">
+							<div th:if="${#fields.hasErrors('preco')}" class="error-message">
+								<ul>
+									<li th:each="error : ${#fields.errors('preco')}" th:text="${error}"></li>
+								</ul>
 							</div>
-							<div class="form-group mt-2">
-								<select class="form-select form-select-sm bg-dark" aria-label="Seleção Status" style="width: 80%;">
-									<option selected>Selecionar Status</option>
-									<option value="true">Ativo</option>
-									<option value="false">Inativo</option>
-								  </select>
+						</div>
+
+						<div class="form-group mt-2">
+							<input type="number" min="0" class="form-style" placeholder="Quantidade em Estoque"
+								   name="quantidade" th:value="${produto.quantidade}">
+							<div th:if="${#fields.hasErrors('quantidade')}" class="error-message">
+								<ul>
+									<li th:each="error : ${#fields.errors('quantidade')}" th:text="${error}"></li>
+								</ul>
 							</div>
-							<div class="form-group mt-2">
-								<input type="number" min="0" class="form-style" placeholder="Quantidade em Estoque"
-									name="quantidade" th:value="${produto.quantidade}">
-								<div th:if="${#fields.hasErrors('quantidade')}" class="error-message">
-									<ul>
-										<li th:each="error : ${#fields.errors('quantidade')}" th:text="${error}"></li>
-									</ul>
-								</div>
+						</div>
+						<div class="inputImagem">
+							<span>Adicionar imagem</span>
+							<div class="selectImagem">
+								<fieldset>
+									<input type="file" class="form-control" id="image" name="image" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required="required">
+									<div class="form-style">
+										<label for="txtOrdenacao0" style="color: #40cfff;">Ordem</label>
+										<input type="number" id="txtOrdenacao0" name="imagens[0].ordenacao" />
+									</div>
+									<button type="button" class="btn btn-secondary">Incluir Imagem</button>
+								</fieldset>
 							</div>
-							<div class="inputImagem">
-								<span>Adicionar imagem</span>
-								<div class="selectImagem">
-									<fieldset>
-										<input type="file" name="imagens[0].arquivo" multiple />
-										<div class="form-style">
-											<label for="txtOrdenacao0" style="color: #40cfff;">Ordem</label>
-											<input type="number" id="txtOrdenacao0" name="imagens[0].ordenacao" />
-										</div>
-										<button type="button" class="btn btn-secondary">Incluir Imagem</button>
-									</fieldset>
-								</div>
-							</div>
-							<button type="submit" class="btn mt-4">Cadastrar</button>
-							<a href="" class="btn mt-4">Voltar</a>
-						</form>
-					</div>
+						</div>
+						<button type="submit" class="btn mt-4">Cadastrar</button>
+						<a href="" class="btn mt-4">Voltar</a>
+					</form>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 </body>
 
 </html>
