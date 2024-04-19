@@ -13,16 +13,16 @@
 
 <body>
 	<nav class="navbar">
-		<a th:href="@{'/'}"> 
-		<div class="left-navbar">
-		  <img th:src="@{/images/cd.ico}" alt="Logo">
-		  <h1>Tialejo ®</h1>
-		</div>
+		<div class="right-navbar">
+		<a th:href="@{'/'}">
+			<div class="left-navbar">
+
+				<img  th:src="@{/images/cd.ico}" alt="Logo">
+				<h1 class="mt-2">Tialejo ®</h1>
+			</div>
 		</a>
 		<!-- Não consigo fazer isso funcionar igual funciona na Landing Page @Joseph me ajuda-->
-		<div class="right-navbar">
-		  <a th:href="@{'/principal'}" class="btn mt-4">Voltar</a>
-		  <a th:href="@{'/login'}" class="btn mt-4">Logout</a>
+
 		</div>
 	  </nav>
 <section class="content">
@@ -50,7 +50,7 @@
 								<li th:text="${error}"></li>
 							</ul>
 						</div>
-					<button type="submit" href="" class="btn mt-4"> Login</button>
+					<button type="submit" class="btn mt-4">Login</button>
 
 					</form>
 				</div>
