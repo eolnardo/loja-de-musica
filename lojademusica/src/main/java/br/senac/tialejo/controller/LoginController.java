@@ -1,5 +1,6 @@
 package br.senac.tialejo.controller;
 
+import br.senac.tialejo.model.Cliente;
 import br.senac.tialejo.model.User;
 import br.senac.tialejo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ import java.util.Optional;
 public class LoginController {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserRepository clienteRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -82,6 +86,42 @@ public class LoginController {
         mv.addObject("error", "Credenciais inválidas. Por favor, tente novamente.");
         return mv;
     }
+
+    @PostMapping("/loginCliente")
+    public ModelAndView loginCliente(@RequestParam("email") String email, @RequestParam("senha") String senha) {
+        ModelAndView mv = new ModelAndView();
+
+        // Verifica se o usuário existe no banco de dados e se a senha está correta
+        Optional<Cliente> clienteOptional = clienteRepository.findByEmail(email);
+        if (clienteOptional.isPresent()) {
+            Cliente cliente = clienteOptional.get();
+
+            setID(cliente.getId());
+
+            System.out.println(getID());
+
+            System.out.println("email:" + cliente.getEmail());
+            System.out.println("senha digitada: " + senha);
+            System.out.println("Senha do Usuário: " + cliente.getSenha());
+
+            if (passwordEncoder.matches(senha, cliente.getSenha())) { // <- verificando senha criptografada
+                // Autentica o usuário e redireciona para a página principal
+                    mv.setViewName("redirect:/landingPage");
+                    return mv;
+            } else {
+                System.out.println("estou aqui");
+                mv.setViewName("redirect:/login");
+                return mv;
+            }
+        }
+
+        // Se as credenciais estiverem incorretas, exibe uma mensagem de erro e retorna para a página de login
+        mv.setViewName("login");
+        mv.addObject("error", "Credenciais inválidas. Por favor, tente novamente.");
+        return mv;
+    }
+
+
 }
 
 
