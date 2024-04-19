@@ -20,7 +20,7 @@ public class User {
     @Column(name = "ROLE")
     private String role;
     @Column(name = "STATUS")
-    private String status;
+    private boolean status;
     @Column(name = "SENHA")
 
     private String senha;
@@ -32,7 +32,7 @@ public class User {
     }
 
 
-    public User(Long id, String name, String email, Integer telefone, String role, String status, String senha, String confirmaSenha) {
+    public User(Long id, String name, String email, Integer telefone, String role, boolean status, String senha, String confirmaSenha) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -84,11 +84,11 @@ public class User {
         this.role = role;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 

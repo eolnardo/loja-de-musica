@@ -59,6 +59,8 @@
                                     <td data-th-text="${user.status}"></td>
                                     <td>
                                         <a th:href="@{'/edit/'+${user.id}}">Editar</a>
+                                        <a th:href="@{'/toggleStatusUser?id=' + ${user.id} + '&action=reactivate'}">Reativar</a>
+                                        <a th:href="@{'/toggleStatusUser?id=' + ${user.id} + '&action=deactivate'}">Desativar</a>
                                     </td>
                                 </tr>
                             </tbody>

@@ -1,5 +1,6 @@
 package br.senac.tialejo.controller;
 
+import br.senac.tialejo.model.Produto;
 import br.senac.tialejo.model.User;
 import br.senac.tialejo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
@@ -103,6 +101,21 @@ public class UserController {
             userRepository.save(userToUpdate);
         }
 
+        return "redirect:/listar-usuarios";
+    }
+
+    @GetMapping("/toggleStatusUser")
+    public String toggleStatus(@RequestParam Long id, @RequestParam String action) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            if ("reactivate".equals(action)) {
+                user.setStatus(true);
+            } else if ("deactivate".equals(action)) {
+                user.setStatus(false);
+            }
+            userRepository.save(user);
+        }
         return "redirect:/listar-usuarios";
     }
 
