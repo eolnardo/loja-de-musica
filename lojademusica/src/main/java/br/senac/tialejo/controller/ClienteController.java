@@ -1,6 +1,7 @@
 package br.senac.tialejo.controller;
 
 import br.senac.tialejo.model.Cliente;
+import br.senac.tialejo.model.User;
 import br.senac.tialejo.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,8 +10,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 @Controller
 public class ClienteController {
@@ -61,4 +65,34 @@ public class ClienteController {
         // Redireciona para a página principal após o cadastro bem-sucedido
         return new ModelAndView("redirect:/loginCliente");
     }
+
+    @GetMapping("/editCliente/{id}")
+    public ModelAndView edit(@PathVariable("id") Long id){
+        ModelAndView mv = new ModelAndView("editCliente");
+        Optional<Cliente> taskFinder = clienteRepository.findById(id);
+
+        if(taskFinder.isPresent()) {
+            Cliente cliente = taskFinder.get();
+            mv.addObject("cliente", cliente);
+        }
+
+        return mv;
+    }
+
+    @PostMapping("/editCliente")
+    public String update(Cliente cliente) {
+        Optional<Cliente> optionalTaskToUpdate = clienteRepository.findById(cliente.getId());
+        if (optionalTaskToUpdate.isPresent()) {
+            Cliente userToUpdate = optionalTaskToUpdate.get();
+            userToUpdate.setName(cliente.getName());
+            userToUpdate.setGenero(cliente.getGenero());
+            userToUpdate.setTelefone(cliente.getTelefone());
+            userToUpdate.setSenha(cliente.getSenha());
+            userToUpdate.setConfirmaSenha(cliente.getConfirmaSenha());
+            clienteRepository.save(userToUpdate);
+        }
+
+        return "redirect:/landingPage";
+    }
+
 }

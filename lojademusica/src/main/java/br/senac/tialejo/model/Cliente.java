@@ -21,13 +21,15 @@ public class Cliente {
     @NotBlank(message = "Email não pode estar em branco!")
     private String email;
     @Column(name = "TELEFONE")
-    private Integer telefone;
+    @NotBlank(message = "Telefone não pode estar em branco!")
+    private String telefone;
     @Column(name = "ENDERECO")
     @NotBlank(message = "Endereço não pode estar em branco!")
     private String endereco;
     @Column(name = "GENERO")
     private String genero;
     @Column(name = "CPF")
+    @Size(max = 14, message = "Colocar CPF incluindo sinais.")
     @NotBlank(message = "CPF não pode estar em branco!")
     private String cpf;
     @Column(name = "SENHA")
@@ -38,7 +40,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(Long id, String name, String email, Integer telefone, String endereco, String genero, String cpf, String senha, String confirmaSenha) {
+    public Cliente(Long id, String name, String email, String telefone, String endereco, String genero, String cpf, String senha, String confirmaSenha) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -62,9 +64,9 @@ public class Cliente {
 
     public void setEmail(String email) {this.email = email;}
 
-    public Integer getTelefone() {return telefone;}
+    public String getTelefone() {return telefone;}
 
-    public void setTelefone(Integer telefone) {this.telefone = telefone;}
+    public void setTelefone(String telefone) {this.telefone = telefone;}
 
     public String getEndereco() {return endereco;}
 

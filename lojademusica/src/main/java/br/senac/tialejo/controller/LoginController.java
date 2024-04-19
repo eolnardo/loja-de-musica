@@ -73,10 +73,10 @@ public class LoginController {
 
             if (passwordEncoder.matches(senha, user.getSenha())) { // <- verificando senha criptografada
                 // Autentica o usuário e redireciona para a página principal
-                if(user.getRole().equals("ADMIN")) {
+                if(user.getRole().equalsIgnoreCase("ADMIN")) {
                     mv.setViewName("redirect:/principal2");
                     return mv;
-                } else if (user.getRole().equals("ESTOQUISTA")) {
+                } else if (user.getRole().equalsIgnoreCase("ESTOQUISTA")) {
                     System.out.println("estou no estoquista");
                     mv.setViewName("redirect:/principal");
                     return mv;
