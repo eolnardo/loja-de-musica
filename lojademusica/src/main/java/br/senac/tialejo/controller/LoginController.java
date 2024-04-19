@@ -2,10 +2,12 @@ package br.senac.tialejo.controller;
 
 import br.senac.tialejo.model.Cliente;
 import br.senac.tialejo.model.User;
+import br.senac.tialejo.repository.ClienteRepository;
 import br.senac.tialejo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,10 +20,15 @@ public class LoginController {
     private UserRepository userRepository;
 
     @Autowired
-    private UserRepository clienteRepository;
+    private ClienteRepository clienteRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @GetMapping("landingPage")
+    public String landingPage(){
+        return "landingPage";
+    }
 
     private static Long ID;
 
@@ -110,13 +117,13 @@ public class LoginController {
                     return mv;
             } else {
                 System.out.println("estou aqui");
-                mv.setViewName("redirect:/login");
+                mv.setViewName("redirect:/loginCliente");
                 return mv;
             }
         }
 
         // Se as credenciais estiverem incorretas, exibe uma mensagem de erro e retorna para a página de login
-        mv.setViewName("login");
+        mv.setViewName("loginCliente");
         mv.addObject("error", "Credenciais inválidas. Por favor, tente novamente.");
         return mv;
     }
